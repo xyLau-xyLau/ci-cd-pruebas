@@ -1,0 +1,36 @@
+name: CI/CD con pruebas de pytest
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout del repositorio
+      uses: actions/checkout@v3
+    - name: Configuracion de Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.14'
+    - name: Instalar dependencias
+      run: pip install -r requirements.txt
+    - name: Ejecución de pruebas
+      run: pytest
+    - name: Generar Html del despliegue
+      run: |
+        echo "<h1> Despliegue exitoso </h1>" > index.html
+    - name: Subir a GitHub Pages
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+    steps:
+    - name: Deploy a Github Pages
+      uses: actions/deploy-pages@v4
