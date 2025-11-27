@@ -35,7 +35,7 @@ jobs:
     steps:
     - name: Crear página según resultado
       run: |
-        if [[ "${{ needs.test.outputs.tests_result}}" == "success"]]; then
+        if [[ "${{ needs.test.outputs.tests_result}}" == "success"]] then
             echo "<h1> Despliegue exitoso </h1>" > index.html
             echo "<p> Las pruebas pasaron correctamente. </p>" >> index.html
         else
