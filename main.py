@@ -1,3 +1,2 @@
 def saludo(nombre):
-    #return f"Hola {nombre}"
-    return "MAL"
+    return f"Hola {nombre}"
